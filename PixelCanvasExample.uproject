@@ -1,0 +1,14 @@
+{
+	"FileVersion": 3,
+	"EngineAssociation": "{F80E5195-4535-17ED-2BAF-7290CAC45120}",
+	"Category": "",
+	"Description": "",
+	"Modules": [
+		{
+			"Name": "PixelCanvasExample",
+			"Type": "Runtime",
+			"LoadingPhase": "Default"
+		}
+	],
+	"Plugins": []
+}
