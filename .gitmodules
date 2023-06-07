@@ -1,0 +1,12 @@
+[submodule "Plugins/glTFRuntime"]
+	path = Plugins/glTFRuntime
+	url = https://github.com/rdeioris/glTFRuntime.git
+[submodule "Plugins/ReadyPlayerMe"]
+	path = Plugins/ReadyPlayerMe
+	url = https://github.com/readyplayerme/rpm-unreal-sdk.git
+[submodule "Plugins/VaRest"]
+	path = Plugins/VaRest
+	url = https://github.com/ufna/VaRest.git
+[submodule "Plugins/SocketIOClient-Unreal"]
+	path = Plugins/SocketIOClient-Unreal
+	url = https://github.com/getnamo/SocketIOClient-Unreal.git

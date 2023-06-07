@@ -10,5 +10,24 @@
 			"LoadingPhase": "Default"
 		}
 	],
-	"Plugins": []
+	"Plugins": [
+		{
+			"Name": "glTFRuntime",
+			"Enabled": true,
+			"MarketplaceURL": "com.epicgames.launcher://ue/marketplace/product/d2ed3709933d4608a3a8dd746cbc045d"
+		},
+		{
+			"Name": "ReadyPlayerMe",
+			"Enabled": true
+		},
+		{
+			"Name": "AwsGameLiftServer",
+			"Enabled": true,
+			"MarketplaceURL": "com.epicgames.launcher://ue/marketplace/content/3437d983a81e423aae09c8dd1f232933"
+		},
+		{
+			"Name": "PixelCanvas",
+			"Enabled": true
+		}
+	]
 }

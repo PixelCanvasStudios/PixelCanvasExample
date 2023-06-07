@@ -331,3 +331,7 @@ RELEASE_MSG
 # Ignore Plugin cache files that looks like Plugins/Developer\AutoSizeComments\ASCCache\*
 Plugins/Developer/AutoSizeComments/ASCCache/*
 Plugins/Developer/BlueprintAssist/NodeSizeCache/*
+
+# Ignore Proprietary Plugins
+Plugins/PixelCanvasPlugin
+Plugins/AwsGameLiftServer
