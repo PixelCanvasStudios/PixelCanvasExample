@@ -335,3 +335,6 @@ Plugins/Developer/BlueprintAssist/NodeSizeCache/*
 # Ignore Proprietary Plugins
 Plugins/PixelCanvasPlugin
 Plugins/AwsGameLiftServer
+
+# Samples folder
+Samples/
