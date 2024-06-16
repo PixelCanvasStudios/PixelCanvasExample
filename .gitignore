@@ -338,3 +338,7 @@ Plugins/AwsGameLiftServer
 
 # Samples folder
 Samples/
+
+.vscode
+
+Build
