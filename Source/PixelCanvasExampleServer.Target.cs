@@ -10,7 +10,7 @@ public class PixelCanvasExampleServerTarget : TargetRules //Change this line acc
 	public PixelCanvasExampleServerTarget(TargetInfo Target) : base(Target) //Change this line according to the name of your project
 	{
 		Type = TargetType.Server;
-		IncludeOrderVersion = EngineIncludeOrderVersion.Unreal5_1;
+		IncludeOrderVersion = EngineIncludeOrderVersion.Unreal5_3;
 		ExtraModuleNames.Add("PixelCanvasExample"); //Change this line according to the name of your project
 	}
 }
