@@ -9,6 +9,7 @@ public class CoreUtility : ModuleRules
     public CoreUtility(ReadOnlyTargetRules Target) : base(Target)
     {
 		PCHUsage = PCHUsageMode.UseExplicitOrSharedPCHs;
+		PrecompileForTargets = PrecompileTargetsType.Any;
 
 		PublicIncludePaths.AddRange(
             new string[] {
@@ -43,6 +44,17 @@ public class CoreUtility : ModuleRules
 				"UEOgg",
 			}
             );
+
+
+        if (Target.Version.MajorVersion == 5 && Target.Version.MinorVersion >= 4)
+        {
+            PrivateDependencyModuleNames.AddRange(
+                new string[]
+                {
+                    "OpusAudioDecoder",
+                }
+            );
+        }
 
 
         DynamicallyLoadedModuleNames.AddRange(

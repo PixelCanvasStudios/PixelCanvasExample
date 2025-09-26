@@ -1,7 +1,7 @@
 {
 	"FileVersion": 3,
 	"Version": 1,
-	"VersionName": "3.2.0",
+	"VersionName": "3.5.0",
 	"FriendlyName": "Ready Player Me",
 	"Description": "Ready Player Me SDK",
 	"Category": "Runtime",
@@ -10,16 +10,15 @@
 	"DocsURL": "https://docs.readyplayer.me/integration-guides/unreal-engine",
 	"MarketplaceURL": "com.epicgames.launcher://ue/marketplace/product/57665e6da03749ceb765905d87f716bd",
 	"SupportURL": "https://docs.readyplayer.me/integration-guides/unreal-engine",
+	"EngineVersion": "5.5.0",
 	"CanContainContent": true,
-	"IsBetaVersion": false,
-	"IsExperimentalVersion": false,
 	"Installed": true,
 	"Modules": [
 		{
 			"Name": "ReadyPlayerMe",
 			"Type": "Runtime",
 			"LoadingPhase": "Default",
-			"WhitelistPlatforms": [
+			"PlatformAllowList": [
 				"Win64",
 				"Mac",
 				"Linux",
@@ -31,7 +30,7 @@
 			"Name": "ReadyPlayerMeEditor",
 			"Type": "Editor",
 			"LoadingPhase": "Default",
-			"WhitelistPlatforms": [
+			"PlatformAllowList": [
 				"Win64",
 				"Mac",
 				"Linux"
@@ -41,7 +40,7 @@
 			"Name": "RpmAvatarCreator",
 			"Type": "Runtime",
 			"LoadingPhase": "Default",
-			"WhitelistPlatforms": [
+			"PlatformAllowList": [
 				"Win64",
 				"Mac",
 				"Linux",
@@ -53,7 +52,7 @@
 			"Name": "glTFRuntime",
 			"Type": "Runtime",
 			"LoadingPhase": "Default",
-			"WhitelistPlatforms": [
+			"PlatformAllowList": [
 				"Win64",
 				"Mac",
 				"Linux",
@@ -65,7 +64,7 @@
 			"Name": "glTFRuntimeEditor",
 			"Type": "Editor",
 			"LoadingPhase": "Default",
-			"WhitelistPlatforms": [
+			"PlatformAllowList": [
 				"Win64",
 				"Mac",
 				"Linux"

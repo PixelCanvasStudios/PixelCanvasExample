@@ -82,6 +82,13 @@ public:
 	UFUNCTION(BlueprintPure, meta = (DisplayName = "To Wav Bytes (Opus Bytes)", BlueprintAutocast), Category = "CoreUtility|Conversion")
 	static TArray<uint8> Conv_OpusBytesToWav(const TArray<uint8>& InBytes);
 
+
+	/**
+	*	Audio conversion - Convert PCM bytes + definition to wav
+	*/
+	UFUNCTION(BlueprintPure, meta = (DisplayName = "To Wav Bytes (PCM Bytes)", BlueprintAutocast), Category = "CoreUtility|Conversion")
+	static TArray<uint8> Conv_PCMToWav(const TArray<uint8>& InPCM, int32 SampleRate, int32 Channels);
+
 	/**
 	*	Audio compression - Convert wav to opus (currently raw serialized)
 	*/
@@ -174,4 +181,20 @@ public:
 	*/
 	UFUNCTION(BlueprintCallable, Category = "CoreUtility|Threading", meta = (Latent, LatentInfo = "LatentInfo", WorldContext = "WorldContextObject"))
 	static void CallFunctionOnThreadGraphReturn(const FString& Function, ESIOCallbackType ThreadType, struct FLatentActionInfo LatentInfo, UObject* WorldContextObject = nullptr);
+
+
+	UFUNCTION(BlueprintCallable, Category = "SocketIOFunctions", CustomThunk, meta = (CustomStructureParam = "AnyStruct"))
+	static bool StructToBytes(TFieldPath<FProperty> AnyStruct, TArray<uint8>& OutBytes);
+
+	DECLARE_FUNCTION(execStructToBytes);
+	
+
+	UFUNCTION(BlueprintCallable, Category = "SocketIOFunctions", CustomThunk, meta = (CustomStructureParam = "OutAnyStruct"))
+	static bool BytesToStruct(const TArray<uint8>& InBytes, TFieldPath<FProperty> OutAnyStruct);
+
+	DECLARE_FUNCTION(execBytesToStruct);
+
+	//C++ binary utility
+	static bool SerializeStruct(UStruct* Struct, void* StructPtr, TArray<uint8>& OutBytes);
+	static bool DeserializeStruct(UStruct* Struct, void* StructPtr, const TArray<uint8>& InBytes);
 };

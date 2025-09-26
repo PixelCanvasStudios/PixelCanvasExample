@@ -1,6 +1,6 @@
 {
 	"FileVersion": 3,
-	"EngineAssociation": "5.3",
+	"EngineAssociation": "5.5",
 	"Category": "",
 	"Description": "",
 	"Modules": [
@@ -17,25 +17,6 @@
 			"TargetAllowList": [
 				"Editor"
 			]
-		},
-		{
-			"Name": "VaRest",
-			"Enabled": true,
-			"MarketplaceURL": "com.epicgames.launcher://ue/marketplace/content/e47be161e7a24e928560290abd5dcc4f"
-		},
-		{
-			"Name": "AwsGameLiftServer",
-			"Enabled": true,
-			"MarketplaceURL": "com.epicgames.launcher://ue/marketplace/content/3437d983a81e423aae09c8dd1f232933"
-		},
-		{
-			"Name": "ReadyPlayerMe",
-			"Enabled": true,
-			"MarketplaceURL": "com.epicgames.launcher://ue/marketplace/product/57665e6da03749ceb765905d87f716bd"
-		},
-		{
-			"Name": "PixelCanvas",
-			"Enabled": true
 		}
 	]
 }

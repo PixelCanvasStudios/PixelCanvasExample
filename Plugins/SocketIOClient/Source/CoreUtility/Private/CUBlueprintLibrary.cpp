@@ -10,7 +10,11 @@
 #include "HAL/ThreadSafeBool.h"
 #include "RHI.h"
 #include "Misc/FileHelper.h"
+#if ENGINE_MAJOR_VERSION == 5 && ENGINE_MINOR_VERSION >= 4
+#include "Decoders/OpusAudioInfo.h"
+#else
 #include "OpusAudioInfo.h"
+#endif
 #include "Runtime/Launch/Resources/Version.h"
 #include "Developer/TargetPlatform/Public/Interfaces/IAudioFormat.h"
 #include "CoreMinimal.h"
@@ -47,7 +51,12 @@ FString UCUBlueprintLibrary::Conv_BytesToString(const TArray<uint8>& InArray)
 TArray<uint8> UCUBlueprintLibrary::Conv_StringToBytes(FString InString)
 {
 	TArray<uint8> ResultBytes;
-	ResultBytes.Append((uint8*)TCHAR_TO_UTF8(*InString), InString.Len());
+
+	FTCHARToUTF8 UTF8String(*InString);
+
+	int32 UTF8Len = UTF8String.Length();
+
+	ResultBytes.Append((uint8*)UTF8String.Get(), UTF8Len);
 	return ResultBytes;
 }
 
@@ -135,6 +144,13 @@ TArray<uint8> UCUBlueprintLibrary::Conv_OpusBytesToWav(const TArray<uint8>& InBy
 		UE_LOG(LogTemp, Warning, TEXT("OpusMinimal to Wave Failed. DecodeStream returned false"));
 	}
 
+	return WavBytes;
+}
+
+TArray<uint8> UCUBlueprintLibrary::Conv_PCMToWav(const TArray<uint8>& InPCM, int32 SampleRate, int32 Channels)
+{
+	TArray<uint8> WavBytes;
+	SerializeWaveFile(WavBytes, InPCM.GetData(), InPCM.Num(), Channels, SampleRate);
 	return WavBytes;
 }
 
@@ -555,6 +571,70 @@ void UCUBlueprintLibrary::CallFunctionOnThreadGraphReturn(const FString& Functio
 	default:
 		break;
 	}
+}
+
+bool UCUBlueprintLibrary::SerializeStruct(UStruct* Struct, void* StructPtr, TArray<uint8>& OutBytes)
+{
+	if (!Struct || !StructPtr)
+	{
+		return false;
+	}
+
+	FMemoryWriter MemoryWriter(OutBytes, true);
+	Struct->SerializeBin(MemoryWriter, StructPtr);
+
+	return true;
+}
+
+bool UCUBlueprintLibrary::DeserializeStruct(UStruct* Struct, void* StructPtr, const TArray<uint8>& InBytes)
+{
+	if (!Struct || !StructPtr || InBytes.Num() == 0)
+	{
+		return false;
+	}
+
+	FMemoryReader MemoryReader(InBytes, true);
+
+	//Bi-directional, also works as a deserialization
+	Struct->SerializeBin(MemoryReader, StructPtr);
+
+	return true;
+}
+
+DEFINE_FUNCTION(UCUBlueprintLibrary::execBytesToStruct)
+{
+	// Extract the parameters
+	P_GET_TARRAY_REF(uint8, InBytes);
+	Stack.StepCompiledIn<FStructProperty>(NULL);
+	FStructProperty* StructProp = CastField<FStructProperty>(Stack.MostRecentProperty);
+	void* StructPtr = Stack.MostRecentPropertyAddress;
+
+	P_FINISH;
+
+	// Deserialize the struct
+	bool bSuccess = DeserializeStruct(StructProp->Struct, StructPtr, InBytes);
+
+	// Return the success status
+	*(bool*)RESULT_PARAM = bSuccess;
+}
+
+//custom thunk needed to handle wildcard structs
+DEFINE_FUNCTION(UCUBlueprintLibrary::execStructToBytes)
+{
+	// Extract the parameters
+	Stack.StepCompiledIn<FStructProperty>(NULL);
+	FStructProperty* StructProp = CastField<FStructProperty>(Stack.MostRecentProperty);
+	void* StructPtr = Stack.MostRecentPropertyAddress;
+
+	P_GET_TARRAY_REF(uint8, OutBytes);
+
+	P_FINISH;
+
+	// Serialize the struct
+	bool bSuccess = SerializeStruct(StructProp->Struct, StructPtr, OutBytes);
+
+	// Return the success status
+	*(bool*)RESULT_PARAM = bSuccess;
 }
 
 #pragma warning( pop )
